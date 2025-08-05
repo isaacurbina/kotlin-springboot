@@ -1,10 +1,26 @@
 package org.example.com.kotlinplayground.basics
 
 fun main() {
-	val name: String = "Dilip"
+	val name = "Dilip"
 	println(name)
-	var age: Int = 34
+
+	var age = 34
 	println(age)
 	age = 35
 	println(age)
+
+	val salary = 30000L
+	println(salary)
+
+	val course = "Kotlin Spring"
+	println("course: $course and the course length is ${course.length}")
+
+	val multiline = "ABC \nDEF"
+	println(multiline)
+
+	val multiline1 = """
+		ABC
+		DEF
+	""".trimIndent()
+	println(multiline1)
 }
