@@ -15,6 +15,11 @@ class Student(name: String): User(name = name) {
 		println("Inside Student Login")
 		super.login()
 	}
+
+	companion object {
+		const val noOfEnrolledCourses = 10
+		fun country() = "USA"
+	}
 }
 
 class Instructor(name: String): User(name = name) {
@@ -32,6 +37,9 @@ fun main() {
 	student.login()
 	student.isLoggedIn = true
 	println("Logged in value is: ${student.isLoggedIn}")
+	val country = Student.country()
+	println("Country is: $country")
+	println("noOfEnrolledCourses is: ${Student.noOfEnrolledCourses}")
 
 	val instructor = Instructor("Dilip")
 	println("Instructor name is: ${instructor.name}")
