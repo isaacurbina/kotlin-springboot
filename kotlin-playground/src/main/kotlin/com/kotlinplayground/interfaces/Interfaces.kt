@@ -15,6 +15,18 @@ interface Repository {
 	fun getAll(): Any
 }
 
+interface A {
+	fun doSomething() {
+		println("doSomething in A")
+	}
+}
+
+interface B {
+	fun doSomething() {
+		println("doSomething in B")
+	}
+}
+
 class SqlCourseRepository : CourseRepository, Repository {
 	override fun getById(id: Int): Course {
 		return Course(id = id, name = "Reactive Programming in Modern Java using Project Reactor", author = "Dilip")
@@ -36,6 +48,14 @@ class NoSqlCourseRepository : CourseRepository {
 	}
 }
 
+class AB: A, B {
+	override fun doSomething() {
+		super<A>.doSomething()
+		super<B>.doSomething()
+		println("doSomething in AB")
+	}
+}
+
 fun main() {
 	val sqlCourseRepository = SqlCourseRepository()
 	val course = sqlCourseRepository.getById(2)
@@ -50,4 +70,7 @@ fun main() {
 	println("Course is: $course1")
 	val courseId1 = noSqlCourseRepository.save(course1)
 	println("Saved Course Id is: $courseId1")
+
+	val ab = AB()
+	ab.doSomething()
 }
