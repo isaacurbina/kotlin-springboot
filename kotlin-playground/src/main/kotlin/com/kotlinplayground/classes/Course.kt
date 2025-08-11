@@ -3,8 +3,16 @@ package org.example.com.kotlinplayground.classes
 data class Course(
 	val id: Int,
 	val name: String,
-	val author: String
+	val author: String,
+	val courseCategory: CourseCategory = CourseCategory.DEVELOPMENT
 )
+
+enum class CourseCategory {
+	DEVELOPMENT,
+	BUSINESS,
+	DESIGN,
+	MARKETING
+}
 
 fun main() {
 	val course = Course(
@@ -18,8 +26,15 @@ fun main() {
 		author = "Dilip"
 	)
 	val course2 = course1.copy(id = 3, author = "Alex")
+	val marketingCourse = Course(
+		id = 4,
+		name = "Business Strategy",
+		author = "Dilip",
+		courseCategory = CourseCategory.MARKETING
+	)
 	println(course)
 	println(course1)
 	println(course2)
+	println(marketingCourse)
 	println("Checking Object Equality: ${course == course1}")
 }
