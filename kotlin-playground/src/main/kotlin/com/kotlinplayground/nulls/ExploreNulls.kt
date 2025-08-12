@@ -14,7 +14,10 @@ private fun saveMovie(movie: Movie): Movie {
 
 fun main() {
 	var nameNullable: String? = null
-	println("Value is: $nameNullable")
+	println("Value is: ${nameNullable?.length ?: 0}")
+
+	nameNullable = "Alex"
+	println("Value is: ${nameNullable.length}")
 
 	nameNullable = "Dilip"
 	println("Value is: $nameNullable")
@@ -23,5 +26,6 @@ fun main() {
 
 	val movie = Movie(null, "Avengers")
 	val savedMovie = saveMovie(movie)
+	println(savedMovie.id!!)
 	println("Saved movie: $savedMovie")
 }
