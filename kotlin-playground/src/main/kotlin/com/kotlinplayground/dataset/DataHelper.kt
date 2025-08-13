@@ -18,7 +18,7 @@ data class Course(
 )
 
 enum class CourseCategory{
-	DEVELOPEMENT,
+	DEVELOPMENT,
 	BUSINESS,
 	DESIGN,
 	MARKETING
@@ -38,43 +38,43 @@ fun courseList(): MutableList<Course> {
 		Course(
 			1,
 			"Apache Kafka for Developers using SpringBoot",
-			CourseCategory.DEVELOPEMENT,
+			CourseCategory.DEVELOPMENT,
 			mutableListOf(KAFKA, JAVA, SPRING_BOOT)
 		),
 		Course(
 			2,
 			"Apache Kafka for Beginners",
-			CourseCategory.DEVELOPEMENT,
+			CourseCategory.DEVELOPMENT,
 			mutableListOf(KAFKA, JAVA)
 		),
 		Course(
 			3,
 			"Multithreading, Parallel and Asynchronous Coding Modern Java ",
-			CourseCategory.DEVELOPEMENT,
+			CourseCategory.DEVELOPMENT,
 			mutableListOf(JAVA, MULTI_THREADING)
 		),
 		Course(
 			4,
 			"Modern Java - Learn Java 8 Features By coding it",
-			CourseCategory.DEVELOPEMENT,
+			CourseCategory.DEVELOPMENT,
 			mutableListOf(JAVA)
 		),
 		Course(
 			5,
 			"Reactive Programming in Modern Java using Project Reactor",
-			CourseCategory.DEVELOPEMENT,
+			CourseCategory.DEVELOPMENT,
 			mutableListOf(REACTIVE_PROGRAMMING, JAVA)
 		),
 		Course(
 			6,
 			"Build Reactive MicroServices using Spring WebFlux/SpringBoot",
-			CourseCategory.DEVELOPEMENT,
+			CourseCategory.DEVELOPMENT,
 			mutableListOf(REACTIVE_PROGRAMMING, JAVA, SPRING_BOOT)
 		),
 		Course(
 			7,
 			"Wiremock for Java Developers",
-			CourseCategory.DEVELOPEMENT,
+			CourseCategory.DEVELOPMENT,
 			mutableListOf(JAVA, INTEGRATION_TESTING)
 		),
 		Course(
