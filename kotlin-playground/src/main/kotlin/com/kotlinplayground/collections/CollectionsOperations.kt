@@ -9,15 +9,30 @@ private fun exploreFilter(
 	predicate: (Course) -> Boolean
 ) {
 	val developmentCourses = courseList
-		.filter { predicate(it) }
+		.filter(predicate)
 		.forEach { println("course: $it") }
 	println("developmentCourses: $developmentCourses")
 }
 
+private fun exploreMap(
+	courseList: List<Course>,
+	predicate: (Course) -> Boolean
+) {
+	val courses = courseList
+		.filter(predicate)
+		.map { "${it.name} - ${it.category}" }
+	println("courses: $courses")
+}
+
 fun main() {
 	val courseList = courseList()
-	val devPredicate = { c: Course -> c.category == CourseCategory.DEVELOPEMENT }
-	val designPredicate = { c: Course -> c.category == CourseCategory.DESIGN }
+	val devPredicate = { c: Course -> c.category == CourseCategory.DEVELOPMENT }
 	exploreFilter(courseList, devPredicate)
+
+	println("---------------------------------------------------------------------")
+	val designPredicate = { c: Course -> c.category == CourseCategory.DESIGN }
 	exploreFilter(courseList, designPredicate)
+
+	println("---------------------------------------------------------------------")
+	exploreMap(courseList, devPredicate)
 }
