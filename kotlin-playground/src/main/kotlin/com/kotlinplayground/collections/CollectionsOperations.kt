@@ -54,6 +54,20 @@ private fun exploreHashMap() {
 	println("maxAge: $maxAge")
 }
 
+private fun collectionsNullability() {
+	var list: MutableList<String>? = null
+	list = mutableListOf()
+	list.add("Dilip")
+	list.forEach {
+		println("value: $it")
+	}
+
+	val list1: List<String?> = listOf("Adam", null, "Alex")
+	list1.forEach {
+		println("value length is: ${it?.length}")
+	}
+}
+
 fun main() {
 	val courseList = courseList()
 	val devPredicate = { c: Course -> c.category == CourseCategory.DEVELOPMENT }
@@ -86,4 +100,7 @@ fun main() {
 
 	println("---------------------------------------------------------------------")
 	exploreHashMap()
+
+	println("---------------------------------------------------------------------")
+	collectionsNullability()
 }
