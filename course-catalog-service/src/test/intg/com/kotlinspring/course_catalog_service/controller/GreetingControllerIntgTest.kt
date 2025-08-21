@@ -1,4 +1,4 @@
-package com.kotlingspring.controller
+package com.kotlinspring.course_catalog_service.controller
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
