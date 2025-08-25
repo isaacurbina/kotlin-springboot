@@ -24,4 +24,13 @@ class CourseService(
 			CourseDTO(it.id, it.name, it.category)
 		}
 	}
+
+	fun retrieveAllCourses(): List<CourseDTO> {
+		logger.info("retrieveAllCourses() called")
+		return courseRepository.findAll()
+			.map {
+				logger.info("course is: $it")
+				CourseDTO(it.id, it.name, it.category)
+			}
+	}
 }
