@@ -10,8 +10,8 @@ import jakarta.persistence.Table
 @Table(name = "Courses")
 data class Course(
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	val id: Int? = null,
-	val name: String = "",
-	val category: String = ""
+	var name: String = "",
+	var category: String = ""
 )
