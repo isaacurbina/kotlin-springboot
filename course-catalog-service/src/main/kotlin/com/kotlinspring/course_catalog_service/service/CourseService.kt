@@ -2,6 +2,7 @@ package com.kotlinspring.course_catalog_service.service
 
 import com.kotlinspring.course_catalog_service.dto.CourseDTO
 import com.kotlinspring.course_catalog_service.entity.Course
+import com.kotlinspring.course_catalog_service.exception.CourseNotFoundException
 import com.kotlinspring.course_catalog_service.repository.CourseRepository
 import mu.KLogging
 import org.springframework.stereotype.Service
@@ -32,5 +33,33 @@ class CourseService(
 				logger.info("course is: $it")
 				CourseDTO(it.id, it.name, it.category)
 			}
+	}
+
+	fun updateCourse(
+		courseId: Int,
+		courseDTO: CourseDTO
+	): CourseDTO {
+		logger.info("updateCourse() called for $courseId")
+		val course = courseRepository.findById(courseId)
+
+		return if (course.isPresent) {
+			course.get().let {
+				it.name = courseDTO.name
+				it.category = courseDTO.category
+				courseRepository.save(it)
+				logger.info("updateCourse() -> Saved course is: $it")
+
+				it.let {
+					CourseDTO(
+						id = it.id,
+						name = it.name,
+						category = it.category
+					)
+				}
+			}
+
+		} else {
+			throw CourseNotFoundException("No course found for id : $courseId")
+		}
 	}
 }
