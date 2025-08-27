@@ -3,6 +3,7 @@ package com.kotlinspring.course_catalog_service.controller
 import com.kotlinspring.course_catalog_service.dto.CourseDTO
 import com.kotlinspring.course_catalog_service.service.CourseService
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -37,5 +38,13 @@ class CourseController(
 		@PathVariable("course_id") courseId: Int
 	): CourseDTO {
 		return courseService.updateCourse(courseId, courseDTO)
+	}
+
+	@DeleteMapping("/{course_id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	fun deleteCourse(
+		@PathVariable("course_id") courseId: Int
+	) {
+		courseService.deleteCourse(courseId)
 	}
 }
