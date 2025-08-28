@@ -1,6 +1,7 @@
 package com.kotlinspring.course_catalog_service.controller
 
 import com.kotlinspring.course_catalog_service.dto.CourseDTO
+import com.kotlinspring.course_catalog_service.entity.Course
 import com.kotlinspring.course_catalog_service.service.CourseService
 import com.kotlinspring.course_catalog_service.util.courseDTO
 import com.ninjasquad.springmockk.MockkBean
@@ -68,5 +69,37 @@ class CourseControllerUnitTest {
 
 		println("courseDTOs: $courses")
 		assertEquals(3, courses!!.size)
+	}
+
+	@Test
+	fun updateCourse() {
+		// existing course
+		val courseDTO = CourseDTO(
+			100,
+			"Build RestFul APis using SpringBoot and Kotlin", "Development"
+		)
+		every { courseServiceMock.updateCourse(any(), any()) } returns courseDTO(
+			id = 100,
+			name = "Build RestFul APis using SpringBoot and Kotlin1",
+			category = "Development"
+		)
+
+		// updated course
+		val updatedCourse = Course(
+			null,
+			"Build RestFul APis using SpringBoot and Kotlin1", "Development"
+		)
+
+		val savedUpdatedCourse = webTestClient
+			.put()
+			.uri("/v1/courses/{courseId}", courseDTO.id)
+			.bodyValue(updatedCourse)
+			.exchange()
+			.expectStatus().isOk
+			.expectBody(CourseDTO::class.java)
+			.returnResult()
+			.responseBody
+
+		assertEquals("Build RestFul APis using SpringBoot and Kotlin1", savedUpdatedCourse!!.name)
 	}
 }
