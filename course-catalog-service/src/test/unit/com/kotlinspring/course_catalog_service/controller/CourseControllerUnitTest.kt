@@ -6,6 +6,8 @@ import com.kotlinspring.course_catalog_service.service.CourseService
 import com.kotlinspring.course_catalog_service.util.courseDTO
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
+import io.mockk.just
+import io.mockk.runs
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -101,5 +103,16 @@ class CourseControllerUnitTest {
 			.responseBody
 
 		assertEquals("Build RestFul APis using SpringBoot and Kotlin1", savedUpdatedCourse!!.name)
+	}
+
+	@Test
+	fun deleteCourse() {
+		every { courseServiceMock.deleteCourse(any()) } just runs
+
+		webTestClient
+			.delete()
+			.uri("/v1/courses/{courseId}", 1)
+			.exchange()
+			.expectStatus().isNoContent
 	}
 }
