@@ -26,12 +26,21 @@ class CourseService(
 		}
 	}
 
-	fun retrieveAllCourses(): List<CourseDTO> {
-		logger.info("retrieveAllCourses() called")
-		return courseRepository.findAll()
+	fun retrieveAllCourses(courseName: String?): List<CourseDTO> {
+		logger.info("retrieveAllCourses() called: courseName: $courseName")
+
+		val courses = courseName?.let {
+			courseRepository.findCoursesByName(courseName)
+		} ?: courseRepository.findAll()
+
+		return courses
 			.map {
 				logger.info("course is: $it")
-				CourseDTO(it.id, it.name, it.category)
+				CourseDTO(
+					id = it.id,
+					name = it.name,
+					category = it.category
+				)
 			}
 	}
 
