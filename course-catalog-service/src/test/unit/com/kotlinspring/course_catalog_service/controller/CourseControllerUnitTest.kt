@@ -31,7 +31,8 @@ class CourseControllerUnitTest {
 		val course = CourseDTO(
 			id = null,
 			name = "Build RestFul APis using SpringBoot and Kotlin",
-			category = "Development"
+			category = "Development",
+			instructorId = 1
 		)
 
 		every { courseServiceMock.addCourse(any()) } returns courseDTO(id = 1)
@@ -54,7 +55,8 @@ class CourseControllerUnitTest {
 		val course = CourseDTO(
 			id = null,
 			name = "",
-			category = ""
+			category = "",
+			instructorId = 1
 		)
 
 		every { courseServiceMock.addCourse(any()) } returns courseDTO(id = 1)
@@ -77,7 +79,8 @@ class CourseControllerUnitTest {
 		val course = CourseDTO(
 			id = null,
 			name = "Build RestFul APis using SpringBoot and Kotlin",
-			category = "Dilip Sundarraj"
+			category = "Dilip Sundarraj",
+			instructorId = 1
 		)
 
 		val errorMessage = "Unexpected error occurred"
@@ -124,8 +127,9 @@ class CourseControllerUnitTest {
 	fun updateCourse() {
 		// existing course
 		val courseDTO = CourseDTO(
-			100,
-			"Build RestFul APis using SpringBoot and Kotlin", "Development"
+			id = 100,
+			name = "Build RestFul APis using SpringBoot and Kotlin",
+			category = "Development"
 		)
 		every { courseServiceMock.updateCourse(any(), any()) } returns courseDTO(
 			id = 100,
