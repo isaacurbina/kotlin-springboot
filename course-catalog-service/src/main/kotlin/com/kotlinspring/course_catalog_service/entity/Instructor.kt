@@ -14,8 +14,8 @@ import jakarta.persistence.Table
 data class Instructor(
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	val id: Int?,
-	var name: String,
+	val id: Int? = null,
+	var name: String = "",
 	@OneToMany(
 		fetch = FetchType.LAZY,
 		mappedBy = "instructor",
