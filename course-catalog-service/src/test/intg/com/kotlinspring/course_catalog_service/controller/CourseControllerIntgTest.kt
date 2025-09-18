@@ -3,7 +3,9 @@ package com.kotlinspring.course_catalog_service.controller
 import com.kotlinspring.course_catalog_service.dto.CourseDTO
 import com.kotlinspring.course_catalog_service.entity.Course
 import com.kotlinspring.course_catalog_service.repository.CourseRepository
+import com.kotlinspring.course_catalog_service.repository.InstructorRepository
 import com.kotlinspring.course_catalog_service.util.courseEntityList
+import com.kotlinspring.course_catalog_service.util.instructorEntity
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -26,19 +28,30 @@ class CourseControllerIntgTest {
 	@Autowired
 	lateinit var courseRepository: CourseRepository
 
+	@Autowired
+	lateinit var instructorRepository: InstructorRepository
+
 	@BeforeEach
 	fun setUp() {
 		courseRepository.deleteAll()
+		instructorRepository.deleteAll()
+
+		val instructor = instructorEntity()
+		instructorRepository.save(instructor)
+
 		val courses = courseEntityList()
 		courseRepository.saveAll(courses)
 	}
 
 	@Test
 	fun addCourse() {
+		val instructor = instructorRepository.findAll().first()
+
 		val course = CourseDTO(
 			id = null,
 			name = "Build RestFul APis using SpringBoot and Kotlin",
-			category = "Development"
+			category = "Development",
+			instructorId = instructor.id
 		)
 
 		val savedCourse = webTestClient
@@ -92,17 +105,23 @@ class CourseControllerIntgTest {
 
 	@Test
 	fun updateCourse() {
+		val instructor = instructorRepository.findAll().first()
+
 		// existing course
 		val course = Course(
-			null,
-			"Build RestFul APis using SpringBoot and Kotlin", "Development"
+			id = null,
+			name = "Build RestFul APis using SpringBoot and Kotlin",
+			category = "Development",
+			instructor = instructor
 		)
 		val savedCourse = courseRepository.save(course)
 
 		// updated course
-		val updatedCourse = Course(
-			null,
-			"Build RestFul APis using SpringBoot and Kotlin1", "Development"
+		val updatedCourse = CourseDTO(
+			id = null,
+			name = "Build RestFul APis using SpringBoot and Kotlin1",
+			category = "Development",
+			instructorId = instructor.id
 		)
 
 		val savedUpdatedCourse = webTestClient
