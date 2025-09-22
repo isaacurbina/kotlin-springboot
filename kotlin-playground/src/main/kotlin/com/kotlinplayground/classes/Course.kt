@@ -1,5 +1,7 @@
 package org.example.com.kotlinplayground.classes
 
+import com.kotlinplayground.classes.CourseJava
+
 data class Course(
 	val id: Int,
 	val name: String,
@@ -37,4 +39,12 @@ fun main() {
 	println(course2)
 	println(marketingCourse)
 	println("Checking Object Equality: ${course == course1}")
+
+
+	val courseJava = CourseJava(
+		1,
+		"Reactive Programming in Modern Java using Project Reactor",
+		"Dilip"
+	)
+	print("courseJava: $courseJava")
 }
